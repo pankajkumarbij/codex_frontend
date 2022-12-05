@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import AuthModal from '../auth/modal';
+import { useSelector } from 'react-redux';
+import { close, open} from '../../redux/reducers/alertslice';
 
 export default function Navbar() {
 
   const [toggle, setToggle] = useState(false);
   const [isLogin,setIsLogin] = useState(false);
+  const alert = useSelector((state) => state.alert.alert);
 
   return(
     <>
@@ -53,7 +56,7 @@ export default function Navbar() {
             }
             <button type="button" onClick={()=>setToggle(!toggle)} className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
               <span className="sr-only">Open main menu</span>
-              <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+              <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
             </button>
           </div>
           <div className={(toggle ? "block " : "hidden ") + "items-center justify-between w-full md:flex md:w-auto md:order-1"}>
@@ -70,6 +73,9 @@ export default function Navbar() {
               <li>
                 <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0">Contact</a>
               </li>
+              {alert ? <li>
+                <button className="bg-blue">alert</button>
+              </li> : ""}
             </ul>
           </div>
         </div>
