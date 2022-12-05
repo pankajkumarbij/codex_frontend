@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AuthModal from '../auth/modal';
 
 export default function Navbar() {
 
@@ -7,7 +8,7 @@ export default function Navbar() {
 
   return(
     <>
-      <nav className="bg-white px-2 sm:px-4 py-1 fixed w-full z-20 top-0 left-0 border-b border-gray-200 shadow">
+      <nav className="bg-white px-2 sm:px-4 py-1 w-full z-20 top-0 left-0 border-b border-gray-200 shadow">
         <div className="container flex flex-wrap items-center justify-between mx-auto">
           <a href="https://flowbite.com/" className="flex items-center">
             <img src="logo.png" className="h-6 mr-1 sm:h-9" alt="Flowbite Logo" />
@@ -73,6 +74,7 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+      <AuthModal />
     </>
   );
 }
