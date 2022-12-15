@@ -14,12 +14,12 @@ export const authSlice = createSlice({
     doLogin: (state) => {
       state.authVar = 1;
     },
-    doRegister: (state) => {
+    doRegister: (state,action) => {
       state.authVar = 2;
     }
   },
 })
 
-export const { closeModal, doLogin, doRegister } = authSlice.actions
+export const { closeModal, doLogin, doRegister } = authSlice.actions;
 
 export default authSlice.reducer;

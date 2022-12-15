@@ -1,16 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AuthModal from '../auth/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { doLogin, doRegister } from '../../redux/reducers/authSlice';
+import Cookie from 'js-cookie';
+import jwt from 'jsonwebtoken';
 
 export default function Navbar() {
 
   const [toggle, setToggle] = useState(false);
   const [isLogin,setIsLogin] = useState(false);
+  const[ user, setUser ] = useState("");
+  const [token, setToken ] = useState("");
   
   const dispatch = useDispatch();
   const authVar = useSelector((state) => state.auth.authVar);
+  
 
+  useEffect(()=>{    
+    const token = Cookie.get('token');
+    var decoded = jwt.decode(token);
+    setToken();
+    //const userId =decoded.userId;
+    if(decoded){
+        setUser(decoded.email);
+    }
+    if(token)
+      setIsLogin(true);
+  },[isLogin]);
+
+  function Logout(userId) {
+    Cookie.remove('token');
+    //setIsLogin(false);
+  }
   return(
     <>
       <nav className="bg-white px-2 sm:px-4 py-1 w-full z-20 top-0 left-0 border-b border-gray-200 shadow">
@@ -37,7 +58,7 @@ export default function Navbar() {
                   <div className="hidden group-hover:block absolute right-0 text-base list-none bg-white divide-y divide-gray-100 rounded shadow">
                     <div className="px-4 py-3">
                       <span className="block text-sm text-gray-900">Bonnie Green</span>
-                      <span className="block text-sm font-medium text-gray-500 truncate">name@flowbite.com</span>
+                      <span className="block text-sm font-medium text-gray-500 truncate">{user}</span>
                     </div>
                     <ul className="py-1" aria-labelledby="user-menu-button">
                       <li>
@@ -50,7 +71,7 @@ export default function Navbar() {
                         <a href="#" className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Earnings</a>
                       </li>
                       <li>
-                        <a onClick={()=>setIsLogin(false)} className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                        <a onClick={()=>Logout()} className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
                       </li>
                     </ul>
                   </div>
