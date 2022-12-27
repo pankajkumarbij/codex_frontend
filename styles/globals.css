@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wrapper-class {
+  border: 1px solid #ccc;
+}
+
+.editor-class {
+  padding: 0.5rem;
+}
+
+.toolbar-class {
+  border-bottom: 1px solid #ccc;
+}

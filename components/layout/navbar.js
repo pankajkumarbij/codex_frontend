@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import AuthModal from '../auth/modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { doLogin, doRegister } from '../../redux/reducers/authSlice';
@@ -6,7 +7,7 @@ import { doLogin, doRegister } from '../../redux/reducers/authSlice';
 export default function Navbar() {
 
   const [toggle, setToggle] = useState(false);
-  const [isLogin,setIsLogin] = useState(false);
+  const [isLogin,setIsLogin] = useState(true);
   
   const dispatch = useDispatch();
   const authVar = useSelector((state) => state.auth.authVar);
@@ -28,7 +29,7 @@ export default function Navbar() {
               </div>
             :
               <div className="flex items-center">
-                <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-0 md:mr-4 md:ml-2 hidden md:block">Write your blog</button>
+                <Link href="/newPost"><button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 text-center mr-0 md:mr-4 md:ml-2 hidden md:block">Write New Post</button></Link>
                 <div className="group relative">
                   <button type="button" className="flex mr-1 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300">
                     <span className="sr-only">Open user menu</span>
